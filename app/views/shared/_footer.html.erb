@@ -1,0 +1,30 @@
+<footer id='footer' class='footer-bottom'>
+  <!-- フッターナビ -->
+  <nav class="navbar fixed-bottom navbar-light bg-light border-top">
+    <div class="container d-flex justify-content-around">
+      <%= link_to root_path, 
+          class: "text-center #{current_page?(root_path) ? 'text-primary' : 'text-secondary'}" do %>
+        <i class="bi bi-house"></i>
+        <div>ホーム</div>
+      <% end %>
+      
+      <%= link_to '#', 
+          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
+        <i class="bi bi-book"></i>
+        <div>テキスト</div>
+      <% end %>
+      
+      <%= link_to '#',
+          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
+        <i class="bi bi-headphones"></i>
+        <div>リスニング</div>
+      <% end %>
+      
+      <%= link_to '#', 
+          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
+        <i class="bi bi-star"></i>
+        <div>お気に入り</div>
+      <% end %>
+    </div>
+  </nav>
+</footer>
