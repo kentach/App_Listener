@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        email: メールアドレス
+        last_name: 姓
+        first_name: 名
+        eiken_level: 英検の取得級
+        nick_name: ニックネーム
+        password: パスワード
+        password_confirmation: パスワード確認
