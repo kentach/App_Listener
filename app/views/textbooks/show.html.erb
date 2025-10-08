@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- 左側：教材画像 -->
+    <div class="col-md-4 text-center mb-3">
+    <div class="textbook-image-container">
+        <%= image_tag @textbook.cover_image, alt: @textbook.name, class: "textbook-image img-fluid rounded" %>
+    </div>
+    </div>
+
+    <!-- 右側：教材名・レベル -->
+    <div class="col-md-8 d-flex flex-column justify-content-center">
+      <h2><%= @textbook.name %></h2>
+      <p class="text-muted">レベル: <%= @textbook.level %></p>
+    </div>
+  </div>
+
+  <!-- 下：音声一覧（Audioは後から追加） -->
+</div>
