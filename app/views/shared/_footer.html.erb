@@ -8,8 +8,8 @@
         <div>ホーム</div>
       <% end %>
       
-      <%= link_to '#', 
-          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
+      <%= link_to textbooks_path, 
+          class: "text-center #{current_page?(textbooks_path) ? 'text-primary' : 'text-secondary'}" do %>
         <i class="bi bi-book"></i>
         <div>テキスト</div>
       <% end %>

@@ -1,0 +1,18 @@
+.textbook-image-container {
+  width: 40%;
+  /* 高さは自動 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.textbook-image {
+  width: 100%;          /* 横幅いっぱい */
+  height: auto;         /* 高さは自動 */
+  object-fit: contain;  /* 画像全体を表示 */
+  border-radius: 8px;
+}
+
+.audio-card p {
+  font-size: 0.95rem;
+}
