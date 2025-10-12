@@ -1,0 +1,11 @@
+<h2>お気に入りの音声</h2>
+
+<% @favorites.each do |favorite| %>
+  <% if favorite.favoritable_type == 'Audio' %>
+    <% audio = favorite.favoritable %>
+    <div class="mb-3">
+      <p><%= audio.title %></p>
+      <%= button_to '♥ お気に入り解除', favorite_path(favoritable_type: 'Audio', favoritable_id: audio.id), method: :delete %>
+    </div>
+  <% end %>
+<% end %>

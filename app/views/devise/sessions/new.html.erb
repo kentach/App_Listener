@@ -2,38 +2,41 @@
   <div class="col-md-6 col-lg-4">
     <h2 class="text-center mb-4">ログイン</h2>
 
-    <%= form_for(resource, as: resource_name, url: user_session_path(resource_name)) do |f| %>
+    <%= form_with(model: resource, url: user_session_path(resource_name), local: true) do |f| %>
+      <!-- エラーメッセージ -->
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="field mb-3">
-        <%= f.label :email, "メールアドレス", class: "form-label" %>
-        <%= f.email_field :email, 
-            autofocus: true, 
-            autocomplete: "email", 
-            class: "form-control" %>
+      <!-- メールアドレス -->
+      <div class="mb-3">
+        <%= f.label :email, "メールアドレス", class: "form-label fw-bold" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", required: true %>
       </div>
 
-      <div class="field mb-3">
-        <%= f.label :password, "パスワード", class: "form-label" %>
-        <%= f.password_field :password, 
-            autocomplete: "current-password", 
-            class: "form-control" %>
+      <!-- パスワード -->
+      <div class="mb-3">
+        <%= f.label :password, "パスワード", class: "form-label fw-bold" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg", required: true %>
       </div>
 
+      <!-- ログイン状態保持 -->
       <% if devise_mapping.rememberable? %>
-        <div class="field mb-3 form-check">
+        <div class="mb-3 form-check">
           <%= f.check_box :remember_me, class: "form-check-input" %>
           <%= f.label :remember_me, "ログイン状態を保持する", class: "form-check-label" %>
         </div>
       <% end %>
 
-      <div class="actions mb-3">
-        <%= f.submit "ログイン", class: "btn btn-primary w-100" %>
+      <!-- ログインボタン -->
+      <div class="d-grid mb-3">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
       </div>
+
     <% end %>
 
+    <!-- Deviseリンク -->
     <div class="text-center">
-      <%= render "devise/shared/links" %>
+      <p class="mb-1">アカウントをお持ちでない場合は <%= link_to "新規登録", new_user_registration_path %></p>
+      <p><%= link_to "パスワードをお忘れですか？", new_user_password_path %></p>
     </div>
   </div>
 </div>

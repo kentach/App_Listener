@@ -1,30 +1,17 @@
-<footer id='footer' class='footer-bottom'>
-  <!-- フッターナビ -->
-  <nav class="navbar fixed-bottom navbar-light bg-light border-top">
-    <div class="container d-flex justify-content-around">
-      <%= link_to root_path, 
-          class: "text-center #{current_page?(root_path) ? 'text-primary' : 'text-secondary'}" do %>
-        <i class="bi bi-house"></i>
-        <div>ホーム</div>
-      <% end %>
-      
-      <%= link_to textbooks_path, 
-          class: "text-center #{current_page?(textbooks_path) ? 'text-primary' : 'text-secondary'}" do %>
-        <i class="bi bi-book"></i>
-        <div>テキスト</div>
-      <% end %>
-      
-      <%= link_to '#',
-          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
-        <i class="bi bi-headphones"></i>
-        <div>リスニング</div>
-      <% end %>
-      
-      <%= link_to '#', 
-          class: "text-center #{current_page?('#') ? 'text-primary' : 'text-secondary'}" do %>
-        <i class="bi bi-star"></i>
-        <div>お気に入り</div>
-      <% end %>
+<footer id="footer" class="bg-white text-dark py-4 mt-5 border-top">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- 左側：コピーライト -->
+      <div class="col-md-6 col-12 text-center text-md-start mb-2 mb-md-0">
+        <p class="mb-0">© 2025 Listener. All rights reserved.</p>
+      </div>
+
+      <!-- 右側：リンク例 -->
+      <div class="col-md-6 col-12 text-center text-md-end">
+        <a href="#" class="text-dark text-decoration-none me-3">利用規約</a>
+        <a href="#" class="text-dark text-decoration-none me-3">プライバシーポリシー</a>
+        <a href="#" class="text-dark text-decoration-none">お問い合わせ</a>
+      </div>
     </div>
-  </nav>
+  </div>
 </footer>
