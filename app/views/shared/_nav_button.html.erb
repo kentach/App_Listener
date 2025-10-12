@@ -1,6 +1,72 @@
-<button class="carousel-control-prev" type="button" data-bs-target="#levelCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#levelCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-</button>
+<footer id="footer" class="footer-bottom bg-white border-top fixed-bottom py-2">
+  <div class="tab-menu d-flex justify-content-center">
+    <%= link_to root_path, 
+        class: "tab-item text-center mx-3 #{current_page?(root_path) ? 'active' : ''}" do %>
+      <i class="bi bi-house"></i>
+      <div>ホーム</div>
+    <% end %>
+
+    <%= link_to textbooks_path, 
+        class: "tab-item text-center mx-3 #{current_page?(textbooks_path) ? 'active' : ''}" do %>
+      <i class="bi bi-book"></i>
+      <div>テキスト</div>
+    <% end %>
+
+    <%= link_to listening_index_path, 
+        class: "tab-item text-center mx-3 #{current_page?(listening_index_path) ? 'active' : ''}" do %>
+      <i class="bi bi-headphones"></i>
+      <div>リスニング</div>
+    <% end %>
+
+    <%= link_to favorites_path, 
+        class: "tab-item text-center mx-3 #{current_page?(favorites_path) ? 'active' : ''}" do %>
+      <i class="bi bi-star"></i>
+      <div>お気に入り</div>
+    <% end %>
+  </div>
+</footer>
+
+<style>
+  /* === タブメニュー風フッター === */
+  .footer-bottom {
+    z-index: 1000;
+  }
+
+  .tab-menu {
+    font-size: 0.9rem;
+  }
+
+  .tab-item {
+    color: #6c757d; /* text-secondary */
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .tab-item.active {
+    color: #0d6efd; /* text-primary */
+    border-bottom: 2px solid #0d6efd;
+  }
+
+  .tab-item:hover {
+    color: #0d6efd;
+  }
+
+  .tab-item i {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  /* モバイル最適化 */
+  @media (max-width: 576px) {
+    .tab-item i {
+      font-size: 1.3rem;
+    }
+    .tab-item div {
+      font-size: 0.75rem;
+    }
+  }
+</style>

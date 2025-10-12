@@ -1,18 +1,64 @@
-.textbook-image-container {
-  width: 40%;
-  /* 高さは自動 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.audio-container {
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.textbook-image {
-  width: 100%;          /* 横幅いっぱい */
-  height: auto;         /* 高さは自動 */
-  object-fit: contain;  /* 画像全体を表示 */
+.tab-menu {
+  display: flex;             /* 横並びにする */
+  justify-content: flex-start; /* 左寄せ（中央寄せは center） */
+  gap: 10px;                 /* タブ同士の間隔 */
+  border-bottom: 1px solid #ccc; /* 下線でタブを区切る */
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 0;
+  cursor: pointer;
+  font-weight: bold;
+  color: #666;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.tab.active {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+
+.tab-content-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.tab-content {
+  display: none;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.4s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.chapter-card {
+  background: #f9f9f9;
   border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.audio-card p {
-  font-size: 0.95rem;
+.chapter-card:hover {
+  background: #eef6ff;
+}
+
+.chapter-title {
+  font-size: 16px;
+  margin: 0;
 }

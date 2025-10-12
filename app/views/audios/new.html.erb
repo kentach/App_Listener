@@ -1,0 +1,29 @@
+<div class="container mt-5" style="max-width: 600px;">
+  <div class="card shadow-sm border-0">
+    <div class="card-body">
+      <h2 class="text-center mb-4">音声を登録する</h2>
+
+      <%= form_with model: @audio, local: true, html: { multipart: true } do |f| %>
+        <div class="mb-3">
+          <%= f.label :title, "タイトル", class: "form-label fw-bold" %>
+          <%= f.text_field :title, class: "form-control", placeholder: "例：Lesson 1 Listening" %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :file, "音声ファイル（mp3など）", class: "form-label fw-bold" %>
+          <%= f.file_field :file, class: "form-control" %>
+          <small class="text-muted">※ MP3 または WAV ファイルを選択してください。</small>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :chapter_id, "章", class: "form-label fw-bold" %>
+          <%= f.collection_select :chapter_id, Chapter.all, :id, :title, { prompt: "章を選択" }, { class: "form-select" } %>
+        </div>
+
+        <div class="d-grid">
+          <%= f.submit "登録する", class: "btn btn-primary btn-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

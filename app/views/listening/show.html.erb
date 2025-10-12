@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- メイン動画部分 -->
+    <div class="col-lg-8">
+      <% if @listening.video.present? %>
+        <% if @listening.video.include?("youtube.com") || @listening.video.include?("youtu.be") %>
+          <% youtube_id = @listening.video.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/)[1] rescue nil %>
+          <% if youtube_id %>
+            <div class="ratio ratio-16x9 mb-3">
+              <iframe src="https://www.youtube.com/embed/<%= youtube_id %>" 
+                      title="<%= @listening.title %>" 
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowfullscreen></iframe>
+            </div>
+          <% end %>
+        <% else %>
+          <video class="w-100 rounded mb-3" controls>
+            <source src="<%= @listening.video %>" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+        <% end %>
+      <% end %>
+
+      <h3 class="fw-bold mb-2"><%= @listening.title %></h3>
+      <div class="d-flex justify-content-between align-items-center mb-3 text-muted">
+        <div>
+          <small><%= @listening.level %> | <%= @listening.created_at.strftime("%Y年%m月%d日") %></small>
+        </div>
+        <div>
+          <button class="btn btn-light btn-sm me-2"><i class="bi bi-hand-thumbs-up"></i> いいね</button>
+          <button class="btn btn-light btn-sm"><i class="bi bi-share"></i> 共有</button>
+        </div>
+      </div>
+
+      <% if @listening.description.present? %>
+        <div class="p-3 border rounded bg-light mb-4">
+          <h6 class="fw-bold mb-2">概要</h6>
+          <p class="mb-0" style="white-space: pre-wrap;"><%= @listening.description %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- サイドバー（関連動画） -->
+    <div class="col-lg-4">
+      <h5 class="fw-bold mb-3">関連動画</h5>
+      <% related_videos = @related_videos || Listening.where(level: @listening.level).where.not(id: @listening.id).limit(6) %>
+
+      <% related_videos.each do |video| %>
+        <div class="d-flex mb-3 align-items-start" style="cursor: pointer;" onclick="window.location.href='<%= listening_path(video) %>'">
+          <% if video.video.present? %>
+            <% if video.video.include?("youtube.com") || video.video.include?("youtu.be") %>
+              <% youtube_id = video.video.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/)[1] rescue nil %>
+              <% if youtube_id %>
+                <img src="https://img.youtube.com/vi/<%= youtube_id %>/0.jpg"
+                     alt="<%= video.title %>" class="rounded me-2" style="width: 120px; height: 70px; object-fit: cover;">
+              <% end %>
+            <% else %>
+              <img src="<%= video.video %>" alt="<%= video.title %>"
+                   class="rounded me-2" style="width: 120px; height: 70px; object-fit: cover;">
+            <% end %>
+          <% end %>
+          <div>
+            <h6 class="fw-bold mb-1 text-truncate" style="max-width: 180px;"><%= video.title %></h6>
+            <small class="text-muted"><%= video.level %></small>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  iframe, video {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border-radius: 12px;
+  }
+  .btn-light:hover {
+    background-color: #f1f1f1;
+  }
+</style>
