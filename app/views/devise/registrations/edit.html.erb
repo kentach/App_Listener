@@ -1,77 +1,101 @@
-<div class="container mt-5" style="max-width: 600px;">
-  <h2 class="text-center mb-4">プロフィール編集</h2>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-
-    <!-- メールアドレス（編集不可なら disabled） -->
-    <div class="mb-3">
-      <%= f.label :email, "メールアドレス", class: "form-label" %>
-      <%= f.email_field :email, class: "form-control", disabled: true %>
-    </div>
-
-    <!-- 姓・名 -->
-    <div class="mb-3">
-      <%= f.label :last_name, "姓", class: "form-label" %>
-      <%= f.text_field :last_name, class: "form-control" %>
-    </div>
-
-    <div class="mb-3">
-      <%= f.label :first_name, "名", class: "form-label" %>
-      <%= f.text_field :first_name, class: "form-control" %>
-    </div>
-
-    <!-- ニックネーム -->
-    <div class="mb-3">
-      <%= f.label :nick_name, "ニックネーム", class: "form-label" %>
-      <%= f.text_field :nick_name, class: "form-control" %>
-    </div>
-
-    <!-- 英検レベル -->
-    <div class="mb-3">
-      <%= f.label :eiken_level, "英検レベル", class: "form-label" %>
-      <%= f.select :eiken_level,
-            options_for_select([["5級",5], ["4級",4], ["3級",3], ["準2級",2], ["2級",1], ["準1級",0], ["1級",-1]], resource.eiken_level),
-            { prompt: "選択してください" },
-            class: "form-select" %>
-    </div>
-
-    <!-- パスワード変更 -->
-    <div class="mb-3">
-      <%= f.label :password, "パスワード変更", class: "form-label" %>
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-      <% if @minimum_password_length %>
-        <small class="form-text text-muted"><%= @minimum_password_length %>文字以上</small>
-      <% end %>
-    </div>
-
-    <div class="mb-3">
-      <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-    </div>
-
-    <!-- 現在のパスワード（必須） -->
-    <div class="mb-3">
-      <%= f.label :current_password, "現在のパスワード", class: "form-label" %>
-      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-      <small class="form-text text-muted">変更する場合は入力必須</small>
-    </div>
-
-    <div class="d-grid mb-3">
-      <%= f.submit "更新する", class: "btn btn-primary btn-lg" %>
-    </div>
-
-  <% end %>
-
-  <!-- アカウント削除 -->
-  <div class="text-center mt-4">
-    <%= button_to "アカウント削除", registration_path(resource_name),
-                  data: { confirm: "本当に削除しますか？" },
-                  method: :delete,
-                  class: "btn btn-outline-danger" %>
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>">
+    <%= message %>
   </div>
+<% end %>
 
-  <div class="text-center mt-3">
-    <%= link_to "戻る", root_path, class: "btn btn-secondary" %>
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="col-md-6 col-lg-4">
+    <h2 class="text-center mb-4">プロフィール編集</h2>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <!-- 姓 -->
+      <div class="mb-3">
+        <%= f.label :last_name, "姓*", class: "form-label" %>
+        <%= f.text_field :last_name, class: "form-control", required: true %>
+      </div>
+
+      <!-- 名前 -->
+      <div class="mb-3">
+        <%= f.label :first_name, "名前*", class: "form-label" %>
+        <%= f.text_field :first_name, class: "form-control", required: true %>
+      </div>
+
+      <!-- ニックネーム -->
+      <div class="mb-3">
+        <%= f.label :nick_name, "ニックネーム", class: "form-label" %>
+        <%= f.text_field :nick_name, class: "form-control" %>
+      </div>
+
+      <!-- プロフィール画像 -->
+      <div class="mb-3">
+        <%= f.label :profile_picture, "プロフィール画像", class: "form-label" %>
+        <% if resource.profile_picture.present? %>
+          <div class="mb-2 text-center">
+            <%= image_tag resource.profile_picture.url, class: "img-thumbnail", style: "max-width: 150px; max-height: 150px;" %>
+          </div>
+        <% end %>
+        <%= f.file_field :profile_picture, class: "form-control", accept: 'image/*' %>
+        <%= f.hidden_field :profile_picture_cache %>
+      </div>
+
+      <!-- メールアドレス -->
+      <div class="mb-3">
+        <%= f.label :email, "Eメール*", class: "form-label" %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+
+      <!-- 英検取得級 -->
+      <div class="mb-3">
+        <%= f.label :eiken_level, "英検取得級*", class: "form-label" %>
+        <%= f.select :eiken_level,
+              [["まだ取得していない", 0], ["英検5級", 1], ["英検4級", 2], ["英検3級", 3],
+               ["英検準2級", 4], ["英検2級", 5],
+               ["英検準1級", 6], ["英検1級", 7]],
+              { prompt: "選択してください" },
+              class: "form-select" %>
+      </div>
+
+      <!-- パスワード変更 -->
+      <div class="mb-3">
+        <%= f.label :password, "新しいパスワード", class: "form-label" %>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+        <% if @minimum_password_length %>
+          <small class="form-text text-muted"><%= @minimum_password_length %>文字以上</small>
+        <% end %>
+      </div>
+
+      <!-- パスワード確認 -->
+      <div class="mb-3">
+        <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      </div>
+
+      <!-- 現在のパスワード -->
+      <div class="mb-3">
+        <%= f.label :current_password, "現在のパスワード（変更時に必須）", class: "form-label" %>
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+
+      <!-- 更新ボタン -->
+      <div class="d-grid mb-3">
+        <%= f.submit "更新する", class: "btn btn-primary btn-lg" %>
+      </div>
+    <% end %>
+
+    <!-- アカウント削除 -->
+    <div class="text-center mt-4">
+      <%= button_to "アカウント削除", registration_path(resource_name),
+                    data: { confirm: "本当に削除しますか？" },
+                    method: :delete,
+                    class: "btn btn-outline-danger" %>
+    </div>
+
+    <!-- 戻るリンク -->
+    <div class="text-center mt-3">
+      <%= link_to "戻る", root_path, class: "btn btn-secondary" %>
+    </div>
   </div>
 </div>
