@@ -37,3 +37,14 @@ document.addEventListener('turbo:load', function() {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburgerBtn = document.getElementById("hamburger-btn");
+  const menu = document.getElementById("hamburger-menu");
+
+  hamburgerBtn.addEventListener("click", () => {
+    hamburgerBtn.classList.toggle("active");
+    menu.classList.toggle("active");
+  });
+});
+

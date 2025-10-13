@@ -1,0 +1,190 @@
+/* ======== 全体設定 ======== */
+body {
+  font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #222;
+  background-color: #fff;
+  text-align: center;
+}
+
+/* ======== ヘッダー ======== */
+.lp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo-text {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #2a61ff;
+}
+
+/* ======== ハンバーガー ======== */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(7px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-7px);
+}
+
+/* ======== ハンバーガーメニュー ======== */
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 1rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.hamburger-menu.active {
+  display: block;
+}
+
+.hamburger-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hamburger-menu li {
+  border-bottom: 1px solid #eee;
+}
+
+.hamburger-menu a {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.hamburger-menu a:hover {
+  background-color: #f5f7ff;
+}
+
+/* ======== ヒーロー ======== */
+.lp-hero {
+  position: relative;
+  padding: 6rem 1rem 8rem;
+  background: radial-gradient(circle at center, #eef3ff 0%, #ffffff 70%);
+  overflow: hidden;
+}
+
+.lp-hero-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.lp-title {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1d1d1f;
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+
+.lp-sub {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+}
+
+/* ======== ボタン ======== */
+.lp-ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  width: 90%;
+  max-width: 320px;
+  text-align: center;
+}
+
+/* 青グラデーション */
+.btn-cta.primary {
+  background: linear-gradient(90deg, #2a61ff, #6d8bff);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(42, 97, 255, 0.3);
+}
+
+.btn-cta.primary:hover {
+  background: linear-gradient(90deg, #1e50e0, #5c7af0);
+}
+
+/* 白ボタン */
+.btn-cta.secondary {
+  background-color: #fff;
+  color: #2a61ff;
+  border: 2px solid #2a61ff;
+}
+
+.btn-cta.secondary:hover {
+  background-color: #2a61ff;
+  color: #fff;
+}
+
+/* ======== 注釈 ======== */
+.lp-note {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ======== スマホ対応 ======== */
+@media (max-width: 768px) {
+  .lp-title {
+    font-size: 1.8rem;
+  }
+
+  .lp-sub {
+    font-size: 1rem;
+  }
+
+  .btn-cta {
+    width: 100%;
+  }
+}

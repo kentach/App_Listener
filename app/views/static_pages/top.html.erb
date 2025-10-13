@@ -1,33 +1,35 @@
-  <div class="container mt-5">
-
-  <!-- 音トレ道場 -->
-  <h2 class="section-title">音トレ道場</h2>
-  <div class="scroll-wrapper">
-    <div id="ontore" class="scroll-container">
-      <% @ontre_textbooks.each do |textbook| %>
-        <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
-          <div class="textbook-card">
-            <%= image_tag textbook.cover_image, alt: textbook.name, class: "textbook-image" %>
-          </div>
+<div class="container mt-5">
+  <% if user_signed_in? %>
+    <!-- 音トレ道場 -->
+    <h2 class="section-title">音トレ道場</h2>
+    <div class="scroll-wrapper">
+      <div id="ontore" class="scroll-container">
+        <% @ontre_textbooks.each do |textbook| %>
+          <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
+            <div class="textbook-card">
+              <%= image_tag textbook.cover_image, class: "textbook-image" %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     </div>
-  </div>
 
-  <!-- リズムでマスター -->
-  <h2 class="section-title mt-4">リズムでマスター</h2>
-  <div class="scroll-wrapper">
-    <div id="rhythm" class="scroll-container">
-      <% @rhythm_textbooks.each do |textbook| %>
-        <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
-          <div class="textbook-card">
-            <%= image_tag textbook.cover_image, alt: textbook.name, class: "textbook-image" %>
-          </div>
+    <!-- リズムでマスター -->
+    <h2 class="section-title mt-4">リズムでマスター</h2>
+    <div class="scroll-wrapper">
+      <div id="rhythm" class="scroll-container">
+        <% @rhythm_textbooks.each do |textbook| %>
+          <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
+            <div class="textbook-card">
+              <%= image_tag textbook.cover_image, class: "textbook-image" %>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <%= render "shared/footer" %>
     </div>
-    <%= render 'shared/footer' %>
-  </div>
+
+  <% else %>
+    <%= render template: "static_pages/home" %>
+  <% end %>
 </div>
-
-
