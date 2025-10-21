@@ -1,0 +1,62 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスが確認されました。"
+      send_instructions: "確認メールを送信しました。メールを確認してください。"
+      send_paranoid_instructions: "もしそのメールアドレスが登録されていれば、確認メールを送信しました。"
+
+    failure:
+      already_authenticated: "すでにログインしています。"
+      inactive: "アカウントが有効化されていません。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      last_attempt: "あと1回間違えるとアカウントがロックされます。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セッションの有効期限が切れました。再度ログインしてください。"
+      unauthenticated: "続行するにはログインが必要です。"
+      unconfirmed: "メールアドレスの確認が完了していません。"
+
+    mailer:
+      confirmation_instructions:
+        subject: "メールアドレス確認のご案内"
+      reset_password_instructions:
+        subject: "パスワード再設定のご案内"
+      unlock_instructions:
+        subject: "アカウントロック解除のご案内"
+      email_changed:
+        subject: "メールアドレス変更のお知らせ"
+      password_change:
+        subject: "パスワード変更のお知らせ"
+
+    omniauth_callbacks:
+      failure: "%{kind} アカウントでの認証に失敗しました: %{reason}"
+      success: "%{kind} アカウントでの認証に成功しました。"
+
+    passwords:
+      no_token: "このページにアクセスするにはパスワードリセットメールのリンクを使用してください。"
+      send_instructions: "パスワードリセットの案内をメールで送信しました。"
+      send_paranoid_instructions: "もしそのメールアドレスが登録されていれば、パスワードリセットの案内を送信しました。"
+      updated: "パスワードが正常に変更されました。"
+      updated_not_active: "パスワードが変更されましたが、アカウントはまだ有効化されていません。"
+
+    registrations:
+      user:
+        destroyed: "アカウントを削除しました。またのご利用をお待ちしています。"
+        signed_up: "アカウントを作成しました。これから英語学習頑張っていきましょう！"
+        signed_up_but_inactive: "アカウントを作成しましたが、まだ有効化されていません。"
+        signed_up_but_locked: "アカウントを作成しましたが、ロックされています。"
+        signed_up_but_unconfirmed: "確認メールを送信しました。メールを確認してください。"
+        update_needs_confirmation: "メールアドレスの変更を確認するメールを送信しました。"
+        updated: "アカウント情報を更新しました。"
+        updated_but_not_signed_in: "アカウント情報を更新しました。再度ログインしてください。"
+
+    sessions:
+      user:
+        signed_in: "おかえりなさい! 今日も英語学習頑張っていきましょう！"
+        signed_out: "ログアウトしました。"
+        already_signed_out: "すでにログアウトしています。"
+
+    unlocks:
+      send_instructions: "アカウントロック解除の案内をメールで送信しました。"
+      send_paranoid_instructions: "もしそのアカウントが存在すれば、解除案内を送信しました。"
+      unlocked: "アカウントのロックを解除しました。ログインできます。"

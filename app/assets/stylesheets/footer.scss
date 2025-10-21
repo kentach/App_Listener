@@ -1,0 +1,37 @@
+/* === Footer Styles === */
+.footer {
+  background: linear-gradient(135deg, #f9f9f9, #f0f0f0);
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.footer-logo {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+  letter-spacing: 1px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #007bff;
+  transform: translateY(-2px);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: #999;
+}

@@ -1,0 +1,10 @@
+<%# videos: Array of video objects, level: レベル名 %>
+<% return if videos.empty? %>
+<div class="mb-5">
+  <h3 class="mb-3 fw-bold"><%= level %></h3>
+  <div class="position-relative">
+    <div id="<%= level.parameterize %>" class="d-flex overflow-auto gap-3 py-2" style="scroll-behavior: smooth;">
+      <%= render partial: "shared/video_card", collection: videos, as: :video %>
+    </div>
+  </div>
+</div>

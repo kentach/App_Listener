@@ -4,26 +4,68 @@
       <h2 class="text-center mb-4">音声を登録する</h2>
 
       <%= form_with model: @audio, local: true, html: { multipart: true } do |f| %>
+
+        <!-- テキスト選択 -->
         <div class="mb-3">
-          <%= f.label :title, "タイトル", class: "form-label fw-bold" %>
-          <%= f.text_field :title, class: "form-control", placeholder: "例：Lesson 1 Listening" %>
+          <%= f.label :textbook_id, "テキスト", class: "form-label fw-bold" %>
+          <%= select_tag :textbook_id,
+              options_from_collection_for_select(Textbook.all, :id, :name),
+              prompt: "テキストを選択",
+              class: "form-select" %>
         </div>
 
+        <!-- 章選択 -->
+        <div class="mb-3">
+          <%= f.label :chapter_id, "章", class: "form-label fw-bold" %>
+          <%= f.collection_select :chapter_id, [], :id, :title, { prompt: "章を選択" }, { class: "form-select" } %>
+        </div>
+
+        <!-- 音声ファイル -->
         <div class="mb-3">
           <%= f.label :file, "音声ファイル（mp3など）", class: "form-label fw-bold" %>
           <%= f.file_field :file, class: "form-control" %>
           <small class="text-muted">※ MP3 または WAV ファイルを選択してください。</small>
         </div>
 
-        <div class="mb-3">
-          <%= f.label :chapter_id, "章", class: "form-label fw-bold" %>
-          <%= f.collection_select :chapter_id, Chapter.all, :id, :title, { prompt: "章を選択" }, { class: "form-select" } %>
-        </div>
-
         <div class="d-grid">
           <%= f.submit "登録する", class: "btn btn-primary btn-lg" %>
         </div>
+
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+document.addEventListener("turbo:load", () => {
+  const textbookSelect = document.querySelector("select[name='textbook_id']");
+  const chapterSelect = document.querySelector("select[name='audio[chapter_id]']");
+
+  if (!textbookSelect || !chapterSelect) return;
+
+  textbookSelect.addEventListener("change", () => {
+    const textbookId = textbookSelect.value;
+
+    // 章セレクトを初期化
+    chapterSelect.innerHTML = '<option value="">章を選択</option>';
+    if (!textbookId) return;
+
+    // Ajaxで取得
+    fetch(`/audios/chapters_for_textbook?textbook_id=${textbookId}`, {
+      headers: { "Accept": "application/json" }
+    })
+      .then(response => response.json())
+      .then(chapters => {
+        if (!Array.isArray(chapters)) return;
+        chapters.forEach(chapter => {
+          const option = document.createElement("option");
+          option.value = chapter.id;
+          option.textContent = chapter.title;
+          chapterSelect.appendChild(option);
+        });
+      })
+      .catch(err => console.error("章の取得に失敗:", err));
+  });
+});
+
+</script>

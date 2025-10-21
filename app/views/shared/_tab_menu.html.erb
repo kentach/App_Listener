@@ -1,0 +1,34 @@
+<!-- タブコンテンツ -->
+<div class="tab-content d-flex flex-column align-items-center">
+  <div id="long" class="tab-pane active" style="max-width: 700px; width: 100%;">
+    <% @chapters.where(series: "長文").order(:number).each do |chapter| %>
+      <% if chapter.audios.any? %>
+        <% audio = chapter.audios.first %>
+        <div class="episode-card mb-3 p-3 d-flex flex-row align-items-center justify-content-between">
+          <!-- 左側：タイトル・説明 -->
+          <div class="episode-info flex-grow-1">
+            <%= link_to audio_path(audio), class: "text-decoration-none text-dark" do %>
+              <h5 class="episode-title mb-1"><%= chapter.title %></h5>
+            <% end %>
+          </div>
+          <!-- 右側：再生ボタン（統一デザイン） -->
+          <div class="episode-actions">
+            <button class="play-button podcast-btn"
+                    data-audio="<%= url_for(audio.file) %>"
+                    aria-label="再生: <%= chapter.title %>">
+              <span class="play-icon">▶︎</span>
+            </button>
+          </div>
+        </div>
+      <% else %>
+        <div class="episode-card mb-3 p-3 d-flex flex-row align-items-center justify-content-between">
+          <h5 class="episode-title mb-0 text-dark"><%= chapter.title %></h5>
+          <span class="text-muted">音声なし</span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- 共通プレイヤー -->
+<audio id="inline-player" style="display:none;"></audio>

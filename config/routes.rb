@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :textbooks, only: [:index, :show]
   resources :chapters, only: %i[index]
   resources :listening, only: [:index, :show]
-  resources :audios, only: [:new, :create, :show]
+  resources :audios, only: [:new, :create, :show] do
+    collection do
+      get :chapters_for_textbook
+    end
+  end
   resources :favorites, only: [:index, :create, :destroy]
 end

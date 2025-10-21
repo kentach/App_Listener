@@ -1,64 +1,83 @@
-.audio-container {
-  width: 90%;
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.tab-menu {
-  display: flex;             /* 横並びにする */
-  justify-content: flex-start; /* 左寄せ（中央寄せは center） */
-  gap: 10px;                 /* タブ同士の間隔 */
-  border-bottom: 1px solid #ccc; /* 下線でタブを区切る */
-}
-
-.tab {
-  flex: 1;
-  padding: 10px 0;
+/* === Podcastエピソードカード === */
+.episode-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+}
+
+.episode-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* === タイトルと説明文 === */
+.episode-title {
+  font-size: 1rem; /* 🔹 小さめタイトル */
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.episode-description {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* === 再生ボタン === */
+.play-button {
+  width: 80px;          /* 横幅を広くして楕円形に */
+  height: 40px;         /* 高さは小さめ */
+  border-radius: 20px;  /* 高さの半分で丸い端に */
+  background: linear-gradient(135deg, #9fd3ff, #007aff);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 122, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
-  color: #666;
-  transition: color 0.3s, border-bottom 0.3s;
+  color: white;
+  transition: all 0.3s ease;
 }
 
-.tab.active {
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
+.play-button:hover {
+  transform: scale(1.05);
 }
 
-.tab-content-wrapper {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
+.play-button.active {
+  background: linear-gradient(135deg, #007aff, #0047ab);
+  box-shadow: 0 6px 12px rgba(0, 122, 255, 0.6);
 }
 
-.tab-content {
-  display: none;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: all 0.4s ease-in-out;
+.bar {
+  width: 3px;
+  height: 6px;
+  background: white;
+  border-radius: 2px;
+  animation: wave 1s infinite ease-in-out;
 }
 
-.tab-content.active {
-  display: block;
-  transform: translateX(0);
-  opacity: 1;
+.bar:nth-child(1) { animation-delay: 0s; }
+.bar:nth-child(2) { animation-delay: 0.2s; }
+.bar:nth-child(3) { animation-delay: 0.4s; }
+
+/* 波形 */
+.waveform {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+  width: 30px;
+  margin-left: 6px; /* ボタンの右に置く */
+  visibility: hidden;
 }
 
-.chapter-card {
-  background: #f9f9f9;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: background 0.3s;
+@keyframes wave {
+  0%, 100% { height: 6px; }
+  50% { height: 18px; }
 }
 
-.chapter-card:hover {
-  background: #eef6ff;
-}
-
-.chapter-title {
-  font-size: 16px;
-  margin: 0;
+.waveform.active {
+  visibility: visible;
 }

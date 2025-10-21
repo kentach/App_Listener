@@ -1,35 +1,34 @@
 <div class="container mt-5">
-  <% if user_signed_in? %>
-    <!-- 音トレ道場 -->
-    <h2 class="section-title">音トレ道場</h2>
-    <div class="scroll-wrapper">
-      <div id="ontore" class="scroll-container">
-        <% @ontre_textbooks.each do |textbook| %>
-          <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
-            <div class="textbook-card">
-              <%= image_tag textbook.cover_image, class: "textbook-image" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+  <!-- 音トレ道場 -->
+  <h2 class="section-title">音トレ道場</h2>
+  <div class="scroll-wrapper d-flex overflow-auto gap-3">
+    <% @ontore_textbooks.each_with_index do |textbook, index| %>
+      <%= link_to textbook_path(textbook), class: "textbook-card-link text-decoration-none" do %>
+        <div class="textbook-card">
+          <%= image_tag textbook.cover_image,
+                        class: "textbook-image img-fluid",
+                        loading: (index == 0 ? "eager" : "lazy"),
+                        width: 300,
+                        height: 400 %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 
-    <!-- リズムでマスター -->
-    <h2 class="section-title mt-4">リズムでマスター</h2>
-    <div class="scroll-wrapper">
-      <div id="rhythm" class="scroll-container">
-        <% @rhythm_textbooks.each do |textbook| %>
-          <%= link_to textbook_path(textbook), class: "textbook-card-link" do %>
-            <div class="textbook-card">
-              <%= image_tag textbook.cover_image, class: "textbook-image" %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <%= render "shared/footer" %>
-    </div>
-
-  <% else %>
-    <%= render template: "static_pages/home" %>
-  <% end %>
+  <!-- リズムでマスター -->
+  <h2 class="section-title mt-4">リズムでマスター</h2>
+  <div class="scroll-wrapper d-flex overflow-auto gap-3">
+    <% @rhythm_textbooks.each_with_index do |textbook, index| %>
+      <%= link_to textbook_path(textbook), class: "textbook-card-link text-decoration-none" do %>
+        <div class="textbook-card">
+          <%= image_tag textbook.cover_image,
+                        class: "textbook-image img-fluid",
+                        loading: (index == 0 ? "eager" : "lazy"),
+                        width: 300,
+                        height: 400 %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
+<%= render "shared/footer" %>
