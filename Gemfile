@@ -27,6 +27,7 @@ gem 'devise'
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'carrierwave', '~> 3.0'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
@@ -56,6 +57,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+
+  gem 'bullet'
 end
 
 group :test do

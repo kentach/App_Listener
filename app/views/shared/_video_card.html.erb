@@ -1,0 +1,20 @@
+<div class="card flex-shrink-0 text-center border-0"
+     style="width: 220px; cursor: pointer;"
+     onclick="window.location.href='<%= listening_path(video) %>'">
+
+  <% if video.video.present? %>
+    <% if video.video.include?("youtube.com") || video.video.include?("youtu.be") %>
+      <% youtube_id = video.video.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/)[1] rescue nil %>
+      <% if youtube_id %>
+        <img src="https://img.youtube.com/vi/<%= youtube_id %>/0.jpg"
+             class="card-img-top rounded" alt="<%= video.title %>">
+      <% end %>
+    <% else %>
+      <img src="<%= video.video %>" class="card-img-top rounded" alt="<%= video.title %>">
+    <% end %>
+  <% end %>
+
+  <div class="card-body p-2">
+    <h6 class="card-title mb-0 text-truncate"><%= video.title %></h6>
+  </div>
+</div>

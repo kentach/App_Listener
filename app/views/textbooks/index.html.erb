@@ -1,35 +1,40 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-5">テキストを探す</h2>
+<div class="container my-5">
 
-  <div id="levelCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <% @textbooks_by_level.sort.each_with_index do |(level, textbooks), index| %>
-        <div class="carousel-item <%= 'active' if index == 0 %>">
-
-          <!-- ▼ レベル見出しを中央に表示 -->
-          <h3 class="text-center mb-2"><%= level %></h3>
-
-          <div class="d-flex justify-content-center flex-wrap">
-            <% textbooks.each do |textbook| %>
-              <div class="text-center m-3">
-                <%= link_to textbook_path(textbook), class: "text-decoration-none" do %>
-                  <div class="textbook-card" style="width: 220px; border: none; box-shadow: none; background: none;">
-                    <div class="textbook-image-container" style="overflow: hidden; border: none;">
-                      <%= image_tag textbook.cover_image,
-                          alt: textbook.name,
-                          class: "img-fluid rounded",
-                          style: "width: 100%; height: auto; max-height: 700px; object-fit: contain; border: none; box-shadow: none;" %>
-                    </div>
-                  </div>
-                <% end %>
-                <!-- ▼ テキスト名を画像の下に表示 -->
-                <p class="mt-2 mb-0 fw-bold"><%= textbook.name %></p>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <%= render "shared/arrows" %>
+<!-- タブ -->
+<div class="tabs-wrapper text-center mb-4">
+  <div class="scroll-tabs d-flex gap-3 justify-content-start" id="levelTabs">
+    <% @textbooks_by_level.keys.each_with_index do |level, i| %>
+      <% tab_id = "tab-#{i}" %>
+      <button
+        class="tab <%= 'active' if i.zero? %>"
+        data-target="<%= tab_id %>">
+        <%= level %>
+      </button>
+    <% end %>
   </div>
 </div>
+
+<!-- コンテンツ -->
+<div class="tab-contents">
+  <% @textbooks_by_level.each_with_index do |(level, textbooks), i| %>
+    <% tab_id = "tab-#{i}" %>
+    <div class="tab-pane <%= 'active' if i.zero? %>" id="<%= tab_id %>">
+      <h3 class="text-center fw-bold mb-3"><%= level %></h3>
+      <div class="d-flex justify-content-center flex-wrap gap-3">
+        <% textbooks.each do |textbook| %>
+          <div class="text-center" style="width:200px;">
+            <%= link_to textbook_path(textbook), class: "text-decoration-none d-block" do %>
+              <%= image_tag textbook.cover_image,
+                  alt: textbook.name,
+                  class: "img-fluid rounded shadow-sm hover-zoom",
+                  style: "width:100%; height:auto; max-height:300px; object-fit:contain;" %>
+              <p class="mt-2 mb-0 fw-semibold text-dark"><%= textbook.name %></p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+<%= render "shared/footer" %>

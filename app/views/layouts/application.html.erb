@@ -9,16 +9,38 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-    <body>
+  <body>
+    <div class="page-wrapper">
       <% if user_signed_in? %>
         <%= render "shared/header" %>
         <%= render "shared/nav_button" %>
-      <% else %>
-        <%= render "shared/before_login_header" %>
-      <% end %>
 
-      <main class="container mt-4">
-        <%= yield %>
-      </main>
-    </body>
+        <!-- ★ フラッシュメッセージをここに追加 -->
+        <% flash.each do |key, message| %>
+          <% alert_class = case key.to_sym
+              when :notice then "alert-success"
+              when :alert  then "alert-danger"
+              else "alert-info"
+            end %>
+          <div class="alert <%= alert_class %> alert-dismissible fade show mx-3 mt-3" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
+        <main class="container mt-4 content">
+          <%= yield %>
+        </main>
+
+      <% else %>
+        <% if devise_controller? %>
+          <main class="container mt-4 content">
+            <%= yield %>
+          </main>
+        <% else %>
+          <%= render "static_pages/home" %>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
 </html>

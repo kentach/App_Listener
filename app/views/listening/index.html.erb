@@ -3,44 +3,10 @@
 
   <% ["英検1級", "英検準1級", "英検2級", "英検準2級", "英検3級", "英検4級", "英検5級"].each do |level| %>
     <% level_videos = @listenings.select { |l| l.level == level } %>
-    <% next if level_videos.empty? %>
-
-    <div class="mb-5">
-      <h3 class="mb-3 fw-bold"><%= level %></h3>
-
-      <div class="position-relative">
-        <!-- 横スクロールコンテナ -->
-        <div id="<%= level.parameterize %>" class="d-flex overflow-auto gap-3 py-2" style="scroll-behavior: smooth;">
-
-          <% level_videos.each do |video| %>
-            <!-- ✅ カードクリックで詳細ページへ遷移 -->
-            <div class="card flex-shrink-0 text-center border-0"
-                 style="width: 220px; cursor: pointer;"
-                 onclick="window.location.href='<%= listening_path(video) %>'">
-              
-              <% if video.video.present? %>
-                <% if video.video.include?("youtube.com") || video.video.include?("youtu.be") %>
-                  <% youtube_id = video.video.match(/(?:v=|\/)([a-zA-Z0-9_-]{11})/)[1] rescue nil %>
-                  <% if youtube_id %>
-                    <img src="https://img.youtube.com/vi/<%= youtube_id %>/0.jpg"
-                         class="card-img-top rounded" alt="<%= video.title %>">
-                  <% end %>
-                <% else %>
-                  <img src="<%= video.video %>" class="card-img-top rounded" alt="<%= video.title %>">
-                <% end %>
-              <% end %>
-
-              <div class="card-body p-2">
-                <h6 class="card-title mb-0 text-truncate"><%= video.title %></h6>
-              </div>
-            </div>
-          <% end %>
-
-        </div>
-      </div>
-    </div>
+    <%= render "shared/video_level", level: level, videos: level_videos %>
   <% end %>
 </div>
+<%= render "shared/footer" %>
 
 <script>
   function scrollLeft(id) {
@@ -55,7 +21,6 @@
 </script>
 
 <style>
-  /* Hulu風に影とカードの余白を少し調整 */
   .card img {
     transition: transform 0.2s;
   }

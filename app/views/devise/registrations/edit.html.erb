@@ -1,9 +1,3 @@
-<% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %>">
-    <%= message %>
-  </div>
-<% end %>
-
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
   <div class="col-md-6 col-lg-4">
     <h2 class="text-center mb-4">プロフィール編集</h2>
@@ -21,24 +15,6 @@
       <div class="mb-3">
         <%= f.label :first_name, "名前*", class: "form-label" %>
         <%= f.text_field :first_name, class: "form-control", required: true %>
-      </div>
-
-      <!-- ニックネーム -->
-      <div class="mb-3">
-        <%= f.label :nick_name, "ニックネーム", class: "form-label" %>
-        <%= f.text_field :nick_name, class: "form-control" %>
-      </div>
-
-      <!-- プロフィール画像 -->
-      <div class="mb-3">
-        <%= f.label :profile_picture, "プロフィール画像", class: "form-label" %>
-        <% if resource.profile_picture.present? %>
-          <div class="mb-2 text-center">
-            <%= image_tag resource.profile_picture.url, class: "img-thumbnail", style: "max-width: 150px; max-height: 150px;" %>
-          </div>
-        <% end %>
-        <%= f.file_field :profile_picture, class: "form-control", accept: 'image/*' %>
-        <%= f.hidden_field :profile_picture_cache %>
       </div>
 
       <!-- メールアドレス -->

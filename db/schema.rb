@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_10_11_130639) do
+ActiveRecord::Schema[7.2].define(version: 2025_10_20_014705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_11_130639) do
   end
 
   create_table "audios", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title"
     t.float "duration"
     t.bigint "chapter_id", null: false
     t.datetime "created_at", null: false
@@ -98,9 +98,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_10_11_130639) do
     t.string "encrypted_password", default: "", null: false
     t.string "last_name", null: false
     t.string "first_name", null: false
-    t.string "nick_name", null: false
     t.integer "eiken_level", null: false
-    t.string "profile_picture"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

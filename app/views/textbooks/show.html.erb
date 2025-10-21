@@ -1,112 +1,24 @@
-<div class="container mt-5">
-  <div class="row">
+<div class="container mt-5" style="max-width:600px;">
+  <h5>
+    <%= link_to "＜テキスト一覧へ", textbooks_path, style: "color: black; text-decoration: none;" %>
+  </h5>
+</div>
+<div class="tab-content d-flex flex-column align-items-center">
+  <div class="row mt-4 justify-content-center">
     <!-- 左側：教材画像 -->
     <div class="col-md-4 text-center mb-3">
-      <div class="textbook-image-container" style="overflow: hidden;">
+      <div class="textbook-image-container" style="overflow: hidden; max-width: 150px; margin: 0 auto;">
         <%= image_tag @textbook.cover_image, alt: @textbook.name,
                       class: "img-fluid rounded",
                       style: "width: 100%; height: auto; object-fit: contain;" %>
       </div>
     </div>
-
     <!-- 右側：教材名・レベル -->
-    <div class="col-md-8 d-flex flex-column justify-content-center">
-      <h2><%= @textbook.name %></h2>
-      <p class="text-muted">レベル: <%= @textbook.level %></p>
+    <div class="col-md-8 d-flex flex-column justify-content-center text-start">
+      <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;"><%= @textbook.name %></h2>
+      <p class="text-muted" style="font-size: 1.1rem;">レベル: <%= @textbook.level %></p>
     </div>
   </div>
-
-  <div class="audio-container mt-4">
-    <!-- タブメニュー（中央寄せ・下線付き） -->
-    <div class="tab-menu d-flex justify-content-center mb-3">
-      <div class="tab active me-3" data-tab="long" style="cursor:pointer;">長文</div>
-      <div class="tab me-3" data-tab="listening" style="cursor:pointer;">リスニング</div>
-      <div class="tab" data-tab="favorite" style="cursor:pointer;">お気に入り</div>
-    </div>
-
-    <!-- タブコンテンツ -->
-    <div class="tab-content">
-      <div id="long" class="tab-pane active">
-        <% @chapters.where(series: "長文").order(:number).each do |chapter| %>
-          <div class="chapter-item border rounded p-3 mb-3 shadow-sm bg-light">
-            <h5 class="mb-2"><%= chapter.title %></h5>
-            <% if chapter.audios.any? %>
-              <ul class="list-unstyled mb-0">
-                <% chapter.audios.each do |audio| %>
-                  <li class="mb-2 d-flex align-items-center justify-content-between">
-                    <%= link_to audio.title, audio_path(audio), class: "audio-link me-2" %>
-                    <button class="btn btn-sm btn-outline-primary" 
-                      onclick="playAudio('<%= url_for(audio.file) %>')">
-                      ▶ 再生
-                    </button>
-                  </li>
-                <% end %>
-              </ul>
-            <% else %>
-              <p class="text-muted mb-0">音声はまだ登録されていません。</p>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-
-      <div id="listening" class="tab-pane">
-        <p class="text-muted">リスニングコンテンツはまだありません。</p>
-      </div>
-
-      <div id="favorite" class="tab-pane">
-        <p class="text-muted">お気に入りコンテンツはまだありません。</p>
-      </div>
-    </div>
-  </div>
+  <!-- タブメニュー（長文・リスニング・お気に入り） -->
+  <%= render "shared/tab_menu" %>
 </div>
-
-<!-- 共通プレイヤー（非表示） -->
-<audio id="inline-player" style="display:none;"></audio>
-
-<!-- タブ切り替え＆音声再生スクリプト -->
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tabs = document.querySelectorAll('.tab-menu .tab');
-
-    // タブ切り替え
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        // すべてのタブから active クラスを削除
-        tabs.forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-
-        // 選択タブに active を追加
-        tab.classList.add('active');
-        const tabId = tab.getAttribute('data-tab');
-        document.getElementById(tabId).classList.add('active');
-      });
-    });
-  });
-
-  // 共通プレイヤーで音声再生
-  function playAudio(url) {
-    const player = document.getElementById('inline-player');
-    if (player.src !== url) {
-      player.src = url;
-    }
-    player.play();
-  }
-</script>
-
-<!-- タブの下線と中央寄せスタイル -->
-<style>
-  .tab-menu .tab {
-    font-weight: 500;
-    padding-bottom: 4px;
-    position: relative;
-  }
-
-  .tab-menu .tab.active {
-    border-bottom: 2px solid #0d6efd; /* 下線カラー（Bootstrapのprimary色） */
-    font-weight: 700;
-  }
-
-  .tab-menu .tab:not(.active):hover {
-    color: #0d6efd;
-  }
-</style>

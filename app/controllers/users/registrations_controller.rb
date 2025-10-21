@@ -43,13 +43,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :last_name,
       :first_name,
-      :nick_name,
       :email,
       :password,
       :password_confirmation,
       :eiken_level,
-      :profile_picture,
-      :profile_picture_cache
     ])
   end
 
@@ -58,19 +55,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       devise_parameter_sanitizer.permit(:account_update, keys: [
         :last_name,
         :first_name,
-        :nick_name,
         :email,
         :password,
         :password_confirmation,
         :eiken_level,
-        :profile_picture,
-        :profile_picture_cache
       ])
     end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    home_index_path
+    root_path
   end
 
   # The path used after sign up for inactive accounts.

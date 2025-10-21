@@ -1,0 +1,73 @@
+/* 再生ボタン小さめ（ブルー系グラデーション） */
+.play-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #00b0ff, #005bb5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+/* ▶︎ */
+.play-button .icon.play {
+  width: 0;
+  height: 0;
+  border-left: 14px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+/* ❚❚ 停止 */
+.play-button .icon.pause {
+  font-size: 18px;
+  color: white;
+}
+
+/* 操作ボタン（3秒戻る・進む・ループ）ブルーに統一 */
+.btn-outline-secondary {
+  border-radius: 8px;
+  border: 1px solid #007bff;
+  color: #007bff;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background: #007bff;
+  color: #fff;
+}
+
+/* ループON */
+#loopBtn.btn-primary {
+  background: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* 進捗バー（ブルー系グラデーション） */
+.progress-container input[type=range] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  background: linear-gradient(to right, #66ccff 0%, #007bff 100%);
+  border-radius: 3px;
+  outline: none;
+}
+
+.progress-container input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #007bff;
+  cursor: pointer;
+}
